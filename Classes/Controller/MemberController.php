@@ -41,6 +41,49 @@ class Tx_Choirmanager_Controller_MemberController extends Tx_Extbase_MVC_Control
 	protected $memberRepository;
 
 	/**
+	 * projectParticipationRepository
+	 *
+	 * @var Tx_Choirmanager_Domain_Repository_ProjectParticipationRepository
+	 */
+	protected $projectParticipationRepository;
+
+	/**
+	 * projectSubscriptionRepository
+	 *
+	 * @var Tx_Choirmanager_Domain_Repository_ProjectSubscriptionRepository
+	 */
+	protected $projectSubscriptionRepository;
+
+	/**
+	 * membershipPeriodRepository
+	 *
+	 * @var Tx_Choirmanager_Domain_Repository_MembershipPeriodRepository
+	 */
+	protected $membershipPeriodRepository;
+
+	/**
+	 * periodSubscriptionRepository
+	 *
+	 * @var Tx_Choirmanager_Domain_Repository_PeriodSubscriptionRepository
+	 */
+	protected $periodSubscriptionRepository;
+
+	/**
+	 * @var Tx_Extbase_Persistence_Manager
+	 */
+	protected $persistenceManager;
+
+	/**
+	 * Inject Persistence Manager
+	 *
+	 * @param Tx_Extbase_Persistence_Manager $persistenceManager
+	 * @return void
+	 */
+	public function injectPersistenceManager(Tx_Extbase_Persistence_Manager $persistenceManager) {
+		$this->persistenceManager = $persistenceManager;
+	}
+
+	/**
 	 * action list
 	 *
 	 * @return void
@@ -106,6 +149,113 @@ class Tx_Choirmanager_Controller_MemberController extends Tx_Extbase_MVC_Control
 	}
 
 	/**
+	 * action editSubscriptions
+	 *
+	 * @return void
+	 */
+	public function editSubscriptionsAction() {
+
+			// uid of member/frontend user
+		$uidMember = (int)$GLOBALS['TSFE']->fe_user->user['uid'];
+		$projects = $this->projectParticipationRepository->findAllTheMemberDidNotSetAlready($uidMember);
+
+		$this->view->assign('projects', $projects);
+	}
+
+	/**
+	 * action updateSubscriptions
+	 *
+	 * @return void
+	 */
+	public function updateSubscriptionsAction() {
+
+			// uid of member/frontend user
+		$uidMember = (int)$GLOBALS['TSFE']->fe_user->user['uid'];
+
+		$arguments = $this->request->getArgument('tx_choirmanager');
+		if (is_array($arguments['projectSubscription'])) {
+			$projectSubscriptions = $arguments['projectSubscription'];
+			foreach ($projectSubscriptions as $uidProject => $projectSubscription) {
+				$status = $projectSubscription['status'];
+
+				/** @var $projectSubscriptionRecord Tx_Choirmanager_Domain_Model_ProjectSubscription */
+				$projectSubscriptionRecord = $this->objectManager->create('Tx_Choirmanager_Domain_Model_ProjectSubscription');
+				$projectSubscriptionRecord->setUidProject($uidProject);
+				$projectSubscriptionRecord->setUidMember($uidMember);
+				$projectSubscriptionRecord->setStatus($status);
+				$this->periodSubscriptionRepository->add($projectSubscriptionRecord);
+				//debug('project: ' . $uidProject . '/member: ' . $uidMember . '/status: ' . $status);
+			}
+		}
+		$this->flashMessageContainer->add('Projektan/-abmeldung gespeichert.');
+
+		$this->redirect('exitSubscriptions');
+
+	}
+
+	/**
+	 * action exitSubscriptions
+	 *
+	 * @return void
+	 */
+	public function exitSubscriptionsAction() {
+	}
+
+	/**
+	 * action editPeriods
+	 *
+	 * @return void
+	 */
+	public function editPeriodsAction() {
+
+			// uid of member/frontend user
+		$uidMember = (int)$GLOBALS['TSFE']->fe_user->user['uid'];
+		$periods = $this->membershipPeriodRepository->findAllTheMemberDidNotSetAlready($uidMember);
+
+		$this->view->assign('periods', $periods);
+	}
+
+	/**
+	 * action updatePeriods
+	 *
+	 * @return void
+	 */
+	public function updatePeriodsAction() {
+
+			// uid of member/frontend user
+		$uidMember = (int)$GLOBALS['TSFE']->fe_user->user['uid'];
+
+		$arguments = $this->request->getArgument('tx_choirmanager');
+		if (is_array($arguments['periodSubscription'])) {
+			$periodSubscriptions = $arguments['periodSubscription'];
+			foreach ($periodSubscriptions as $uidPeriod => $periodSubscription) {
+				$status = $periodSubscription['status'];
+
+				/** @var $periodSubscriptionRecord Tx_Choirmanager_Domain_Model_PeriodSubscription */
+				$periodSubscriptionRecord = $this->objectManager->create('Tx_Choirmanager_Domain_Model_PeriodSubscription');
+				$periodSubscriptionRecord->setUidPeriod($uidPeriod);
+				$periodSubscriptionRecord->setUidMember($uidMember);
+				$periodSubscriptionRecord->setStatus($status);
+				$this->periodSubscriptionRepository->add($periodSubscriptionRecord);
+				//debug('project: ' . $uidProject . '/member: ' . $uidMember . '/status: ' . $status);
+			}
+		}
+
+		$this->flashMessageContainer->add('Semesteran/-abmeldung gespeichert.');
+
+		$this->redirect('exitPeriods');
+
+	}
+
+	/**
+	 * action exitPeriods
+	 *
+	 * @return void
+	 */
+	public function exitPeriodsAction() {
+	}
+
+	/**
 	 * action delete
 	 *
 	 * @param Tx_Choirmanager_Domain_Model_Member
@@ -125,6 +275,46 @@ class Tx_Choirmanager_Controller_MemberController extends Tx_Extbase_MVC_Control
 	 */
 	public function injectMemberRepository(Tx_Choirmanager_Domain_Repository_MemberRepository $memberRepository) {
 		$this->memberRepository = $memberRepository;
+	}
+
+	/**
+	 * injectProjectParticipationRepository
+	 *
+	 * @param Tx_Choirmanager_Domain_Repository_ProjectParticipationRepository $projectParticipationRepository
+	 * @return void
+	 */
+	public function injectProjectParticipationRepository(Tx_Choirmanager_Domain_Repository_ProjectParticipationRepository $projectParticipationRepository) {
+		$this->projectParticipationRepository = $projectParticipationRepository;
+	}
+
+	/**
+	 * injectProjectSubscriptionRepository
+	 *
+	 * @param Tx_Choirmanager_Domain_Repository_ProjectSubscriptionRepository $projectSubscriptionRepository
+	 * @return void
+	 */
+	public function injectProjectSubscriptionRepository(Tx_Choirmanager_Domain_Repository_ProjectSubscriptionRepository $projectSubscriptionRepository) {
+		$this->projectSubscriptionRepository = $projectSubscriptionRepository;
+	}
+
+	/**
+	 * injectMembershipPeriodRepository
+	 *
+	 * @param Tx_Choirmanager_Domain_Repository_MembershipPeriodRepository $membershipPeriodRepository
+	 * @return void
+	 */
+	public function injectMembershipPeriodRepository(Tx_Choirmanager_Domain_Repository_MembershipPeriodRepository $membershipPeriodRepository) {
+		$this->membershipPeriodRepository = $membershipPeriodRepository;
+	}
+
+	/**
+	 * injectPeriodSubscriptionRepository
+	 *
+	 * @param Tx_Choirmanager_Domain_Repository_PeriodSubscriptionRepository $periodSubscriptionRepository
+	 * @return void
+	 */
+	public function injectPeriodSubscriptionRepository(Tx_Choirmanager_Domain_Repository_PeriodSubscriptionRepository $periodSubscriptionRepository) {
+		$this->periodSubscriptionRepository = $periodSubscriptionRepository;
 	}
 
 }

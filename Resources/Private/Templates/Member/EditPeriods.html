@@ -1,0 +1,35 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+
+<f:security.ifAuthenticated>
+
+	<f:then>
+
+		<f:form action="updatePeriods">
+
+		<table>
+			<tbody>
+				<f:for each="{periods}" as="period">
+				<tr>
+					<td>{period.membershipPeriodLabel} (<f:format.date format="d.m.Y">{period.showFrom}</f:format.date> - <f:format.date format="d.m.Y">{period.showTo}</f:format.date>)</td>
+					<td><label><f:form.radio name="tx_choirmanager[periodSubscription][{period.uid}][status]" value="1" /> Ja</label></td>
+					<td><label><f:form.radio name="tx_choirmanager[periodSubscription][{period.uid}][status]" value="0" /> Nein</label></td>
+				</tr>
+				</f:for>
+			</tbody>
+		</table>
+
+		<f:form.submit value="Semesterteilnahme speichern" />
+
+		</f:form>
+
+	</f:then>
+	<f:else>
+		Zugriff verweigert. Du musst angemeldet sein.
+	</f:else>
+
+</f:security.ifAuthenticated>
+
+
+</f:section>

@@ -31,8 +31,18 @@
 			<label index="tx_choirmanager_domain_model_projectparticipation.project_participation_label">Project name</label>
 			<label index="tx_choirmanager_domain_model_projectparticipation.membershipperiod">Membership period</label>
 			<label index="tx_choirmanager_domain_model_projectparticipation.date">Date</label>
-			
-			
+
+			<label index="tx_choirmanager_domain_model_projectsubscription">Project Subscription</label>
+			<label index="tx_choirmanager_domain_model_projectsubscription.uid_member">UID member</label>
+			<label index="tx_choirmanager_domain_model_projectsubscription.uid_project">UID project</label>
+			<label index="tx_choirmanager_domain_model_projectsubscription.status">Status</label>
+
+			<label index="tx_choirmanager_domain_model_periodsubscription">Period Subscription</label>
+			<label index="tx_choirmanager_domain_model_periodsubscription.uid_member">UID member</label>
+			<label index="tx_choirmanager_domain_model_periodsubscription.uid_period">UID period</label>
+			<label index="tx_choirmanager_domain_model_periodsubscription.status">Status</label>
+
+
 		</languageKey>
 	</data>
 </T3locallang>

@@ -14,6 +14,20 @@ Tx_Extbase_Utility_Extension::registerPlugin(
 	'Choir Manager: List members'
 );
 	
+	// Edit subscriptions in frontend
+Tx_Extbase_Utility_Extension::registerPlugin(
+	$_EXTKEY,
+	'EditSubscriptions',
+	'Choir Manager: Edit project subscriptions'
+);
+
+	// Edit periods in frontend
+Tx_Extbase_Utility_Extension::registerPlugin(
+	$_EXTKEY,
+	'EditPeriods',
+	'Choir Manager: Edit period subscriptions'
+);
+
 
 t3lib_div::loadTCA('fe_users');
 if (!isset($TCA['fe_users']['ctrl']['type'])) {
@@ -282,5 +296,56 @@ $TCA['fe_users']['types']['Tx_Choirmanager_Member']['showitem'] .= 'birthdate, j
 				),
 			);
 		
+
+			t3lib_extMgm::addLLrefForTCAdescr('tx_choirmanager_domain_model_projectsubscription', 'EXT:choirmanager/Resources/Private/Language/tx_choirmanager_domain_model_projectsubscription.xml');
+			t3lib_extMgm::allowTableOnStandardPages('tx_choirmanager_domain_model_projectsubscription');
+			$TCA['tx_choirmanager_domain_model_projectsubscription'] = array(
+				'ctrl' => array(
+					'title'	=> 'LLL:EXT:choirmanager/Resources/Private/Language/locallang_db.xml:tx_choirmanager_domain_model_projectsubscription',
+					'label' => 'uid_member',
+					'tstamp' => 'tstamp',
+					'crdate' => 'crdate',
+					'cruser_id' => 'cruser_id',
+					'dividers2tabs' => TRUE,
+					'versioningWS' => 0,
+					'versioning_followPages' => TRUE,
+					'origUid' => 't3_origuid',
+					'l10n_mode' => 'exclude',
+					'delete' => 'deleted',
+					'enablecolumns' => array(
+						'disabled' => 'hidden',
+						'starttime' => 'starttime',
+						'endtime' => 'endtime',
+					),
+					'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/ProjectSubscription.php',
+					'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_choirmanager_domain_model_projectsubscription.gif'
+				),
+			);
+
+			t3lib_extMgm::addLLrefForTCAdescr('tx_choirmanager_domain_model_periodsubscription', 'EXT:choirmanager/Resources/Private/Language/tx_choirmanager_domain_model_periodsubscription.xml');
+			t3lib_extMgm::allowTableOnStandardPages('tx_choirmanager_domain_model_periodsubscription');
+			$TCA['tx_choirmanager_domain_model_periodsubscription'] = array(
+				'ctrl' => array(
+					'title'	=> 'LLL:EXT:choirmanager/Resources/Private/Language/locallang_db.xml:tx_choirmanager_domain_model_periodsubscription',
+					'label' => 'uid_member',
+					'tstamp' => 'tstamp',
+					'crdate' => 'crdate',
+					'cruser_id' => 'cruser_id',
+					'dividers2tabs' => TRUE,
+					'versioningWS' => 0,
+					'versioning_followPages' => TRUE,
+					'origUid' => 't3_origuid',
+					'l10n_mode' => 'exclude',
+					'delete' => 'deleted',
+					'enablecolumns' => array(
+						'disabled' => 'hidden',
+						'starttime' => 'starttime',
+						'endtime' => 'endtime',
+					),
+					'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/PeriodSubscription.php',
+					'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_choirmanager_domain_model_periodsubscription.gif'
+				),
+			);
+
 
 ?>

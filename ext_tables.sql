@@ -236,19 +236,23 @@ CREATE TABLE tx_choirmanager_member_projectparticipation_mm (
 );
 
 #
-# Table structure for table 'tx_choirmanager_project_subscription'
+# Table structure for table 'tx_choirmanager_domain_model_projectsubscription'
 #
-CREATE TABLE tx_choirmanager_project_subscription (
+CREATE TABLE tx_choirmanager_domain_model_projectsubscription (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
-
-	uid_member int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_project int(11) unsigned DEFAULT '0' NOT NULL,
-	status int(11) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
+	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	starttime int(11) unsigned DEFAULT '0' NOT NULL,
+	endtime int(11) unsigned DEFAULT '0' NOT NULL,
+
+	uid_member int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_project int(11) unsigned DEFAULT '0' NOT NULL,
+	status int(11) unsigned DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY uid_member (uid_member),
@@ -256,19 +260,23 @@ CREATE TABLE tx_choirmanager_project_subscription (
 );
 
 #
-# Table structure for table 'tx_choirmanager_period_subscription'
+# Table structure for table 'tx_choirmanager_domain_model_periodsubscription'
 #
-CREATE TABLE tx_choirmanager_event_subscription (
+CREATE TABLE tx_choirmanager_domain_model_periodsubscription (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
-
-	uid_member int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_period int(11) unsigned DEFAULT '0' NOT NULL,
-	status int(11) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
+	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	starttime int(11) unsigned DEFAULT '0' NOT NULL,
+	endtime int(11) unsigned DEFAULT '0' NOT NULL,
+
+	uid_member int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_period int(11) unsigned DEFAULT '0' NOT NULL,
+	status int(11) unsigned DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY uid_member (uid_member),

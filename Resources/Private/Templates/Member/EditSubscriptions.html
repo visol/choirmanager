@@ -1,0 +1,35 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+
+<f:security.ifAuthenticated>
+
+	<f:then>
+
+		<f:form action="updateSubscriptions">
+
+		<table>
+			<tbody>
+				<f:for each="{projects}" as="project">
+				<tr>
+					<td><f:format.date format="d.m.Y">{project.date}</f:format.date>: {project.projectParticipationLabel}</td>
+					<td><label><f:form.radio name="tx_choirmanager[projectSubscription][{project.uid}][status]" value="1" /> Ja</label></td>
+					<td><label><f:form.radio name="tx_choirmanager[projectSubscription][{project.uid}][status]" value="0" /> Nein</label></td>
+				</tr>
+				</f:for>
+			</tbody>
+		</table>
+
+		<f:form.submit value="Projektteilnahme speichern" />
+
+		</f:form>
+
+	</f:then>
+	<f:else>
+		Zugriff verweigert. Du musst angemeldet sein.
+	</f:else>
+
+</f:security.ifAuthenticated>
+
+
+</f:section>
