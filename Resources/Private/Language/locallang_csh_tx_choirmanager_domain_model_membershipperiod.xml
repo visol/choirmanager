@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<description>Context Sensitive Help (CSH) for table tx_choirmanager_domain_model_membershipperiod</description>
+		<type>CSH</type>
+		<csh_table>tx_choirmanager_domain_model_membershipperiod</csh_table>
+	</meta>
+	<data type="array">
+	<languageKey index="default" type="array">
+			<label index="membership_period_label.description">Label</label>
+			<label index="show_from.description">Show from date</label>
+			<label index="show_to.description">Show to date</label>
+		</languageKey>
+	</data>
+</T3locallang>

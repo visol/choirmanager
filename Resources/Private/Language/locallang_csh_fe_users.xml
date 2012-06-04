@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<description>Context Sensitive Help (CSH) for table fe_users</description>
+		<type>CSH</type>
+		<csh_table>fe_users</csh_table>
+	</meta>
+	<data type="array">
+	<languageKey index="default" type="array">
+			<label index="birthdate.description">Date of birth</label>
+			<label index="job.description">Job</label>
+			<label index="voicetype.description">Voice type</label>
+			<label index="membership_period.description">Membership period</label>
+			<label index="project_participation.description">Project participation</label>
+		</languageKey>
+	</data>
+</T3locallang>

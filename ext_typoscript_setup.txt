@@ -1,0 +1,22 @@
+config.tx_extbase{
+    persistence{
+        classes{
+
+            Tx_Extbase_Domain_Model_FrontendUser {
+                subclasses {
+                    Tx_Choirmanager_Member = Tx_Choirmanager_Domain_Model_Member
+					
+          		}
+            }
+            
+            
+            Tx_Choirmanager_Domain_Model_Member {
+                mapping {
+                    tableName = fe_users
+                    recordType = Tx_Choirmanager_Member
+                }
+            }
+            
+    	}
+    }
+}

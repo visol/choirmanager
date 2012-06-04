@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'choirmanager'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_choirmanager_domain_model_member">Member</label>
+			<label index="tx_choirmanager_domain_model_member.birthdate">Birthdate</label>
+			<label index="tx_choirmanager_domain_model_member.job">Job</label>
+			<label index="tx_choirmanager_domain_model_member.voicetype">Voice type</label>
+			<label index="tx_choirmanager_domain_model_member.membership_period">Membership Period</label>
+			<label index="tx_choirmanager_domain_model_member.project_participation">Project Participation</label>
+			<label index="fe_users.tx_extbase_type.Tx_Choirmanager_Member">Choir Manager Member</label>
+			
+			<label index="tx_choirmanager_domain_model_job">Job</label>
+			<label index="tx_choirmanager_domain_model_job.job_label">Job Label</label>
+			
+			<label index="tx_choirmanager_domain_model_voicetype">Voice type</label>
+			<label index="tx_choirmanager_domain_model_voicetype.voicetype_label">Voice type label</label>
+
+
+			<label index="tx_choirmanager_domain_model_membershipperiod">Membership Period</label>
+			<label index="tx_choirmanager_domain_model_membershipperiod.membership_period_label">Membership Period Label</label>
+			<label index="tx_choirmanager_domain_model_membershipperiod.show_from">Show From</label>
+			<label index="tx_choirmanager_domain_model_membershipperiod.show_to">Show To</label>
+			
+			
+			<label index="tx_choirmanager_domain_model_projectparticipation">Project Participation</label>
+			<label index="tx_choirmanager_domain_model_projectparticipation.project_participation_label">Project name</label>
+			<label index="tx_choirmanager_domain_model_projectparticipation.membershipperiod">Membership period</label>
+			<label index="tx_choirmanager_domain_model_projectparticipation.date">Date</label>
+			
+			
+		</languageKey>
+	</data>
+</T3locallang>

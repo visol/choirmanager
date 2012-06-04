@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for the Choir Manager extension in the FRONTEND</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_choirmanager_domain_model_member">Chor Manager User</label>
+			<label index="tx_choirmanager_domain_model_member.birthdate">Date of birth</label>
+			<label index="tx_choirmanager_domain_model_member.job">Job</label>
+			<label index="tx_choirmanager_domain_model_member.membership_period">Membership period</label>
+			<label index="tx_choirmanager_domain_model_member.project_participation">Project participation</label>
+			<label index="tx_choirmanager_domain_model_job">Job</label>
+			<label index="tx_choirmanager_domain_model_voicetype">Voice type</label>
+			<label index="tx_choirmanager_domain_model_job.job_label">Label</label>
+			<label index="tx_choirmanager_domain_model_job.voicetype_label">Label</label>
+			<label index="tx_choirmanager_domain_model_membershipperiod">Membership period</label>
+			<label index="tx_choirmanager_domain_model_membershipperiod.membership_period_label">Label</label>
+			<label index="tx_choirmanager_domain_model_membershipperiod.show_from">Show from date</label>
+			<label index="tx_choirmanager_domain_model_membershipperiod.show_to">Show to date</label>
+			<label index="tx_choirmanager_domain_model_projectparticipation">Project participation</label>
+			<label index="tx_choirmanager_domain_model_projectparticipation.project_participation_label">Label</label>
+			<label index="tx_choirmanager_domain_model_projectparticipation.date">Date</label>
+		</languageKey>
+	</data>
+</T3locallang>

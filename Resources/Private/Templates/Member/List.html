@@ -1,0 +1,27 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+
+<table id="memberlist" class="tx_choirmanager" >
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>E-Mail</th>
+			<th>Telefon</th>
+			<th>Stimmlage</th>
+		</tr>
+	</thead>
+
+	<tbody>
+	<f:for each="{members}" as="member">
+		<tr>
+			<td>{member.lastName} {member.firstName}</td>
+			<td>{member.email}</td>
+			<td>{member.telephone}</td>
+			<td>{member.voicetype.voicetypeLabel}</td>
+		</tr>
+	</f:for>
+	</tbody>
+</table>
+
+</f:section>
