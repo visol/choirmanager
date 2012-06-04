@@ -183,7 +183,7 @@ class Tx_Choirmanager_Controller_MemberController extends Tx_Extbase_MVC_Control
 				$projectSubscriptionRecord->setUidProject($uidProject);
 				$projectSubscriptionRecord->setUidMember($uidMember);
 				$projectSubscriptionRecord->setStatus($status);
-				$this->periodSubscriptionRepository->add($projectSubscriptionRecord);
+				$this->projectSubscriptionRepository->add($projectSubscriptionRecord);
 				//debug('project: ' . $uidProject . '/member: ' . $uidMember . '/status: ' . $status);
 			}
 		}
