@@ -39,4 +39,5 @@ class Tx_Choirmanager_Domain_Repository_MemberRepository extends Tx_Extbase_Pers
      );
 	
 }
+
 ?>

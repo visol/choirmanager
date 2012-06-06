@@ -33,45 +33,6 @@
  */
 class Tx_Choirmanager_Domain_Repository_MembershipPeriodRepository extends Tx_Extbase_Persistence_Repository {
 
-	/**
-	* @var Tx_Extbase_Configuration_ConfigurationManagerInterface
-	*/
-	protected $configurationManager;
-
-	/**
-	* @param Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager
-	* @return void
-	*/
-	public function injectConfigurationManager(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager) {
-		$this->configurationManager = $configurationManager;
-	}
-
-	/**
-	 * Returns all artists that are like a search term
-	 *
-	 * @return array An array of objects, empty if no objects found
-	 * @api
-	 */
-	public function findAllTheMemberDidNotSetAlready($uidMember) {
-
-		$query = $this->createQuery();
-
-			// Storage PID
-		$frameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-		$storagePid = $frameworkConfiguration['persistence']['storagePid'];
-
-		$query->statement("
-			SELECT DISTINCT mp.uid, mp.*, ps.uid_member
-			FROM tx_choirmanager_domain_model_membershipperiod as mp
-			LEFT JOIN tx_choirmanager_domain_model_periodsubscription as ps
-			ON mp.uid = ps.uid_period
-			WHERE (mp.pid=" . $storagePid . " AND mp.deleted = 0 AND mp.hidden = 0)
-			AND ps.uid_member !=" . $uidMember . " AND ps.uid_member IS NULL
-		");
-
-		return $query->execute();
-
-	}
-
 }
+
 ?>

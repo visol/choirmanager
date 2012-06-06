@@ -33,46 +33,5 @@
  */
 class Tx_Choirmanager_Domain_Repository_ProjectParticipationRepository extends Tx_Extbase_Persistence_Repository {
 
-	/**
-	* @var Tx_Extbase_Configuration_ConfigurationManagerInterface
-	*/
-	protected $configurationManager;
-
-	/**
-	* @param Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager
-	* @return void
-	*/
-	public function injectConfigurationManager(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager) {
-		$this->configurationManager = $configurationManager;
-	}
-
-	/**
-	 * Returns all artists that are like a search term
-	 *
-	 * @return array An array of objects, empty if no objects found
-	 * @api
-	 */
-	public function findAllTheMemberDidNotSetAlready($uidMember) {
-
-		$query = $this->createQuery();
-
-			// Storage PID
-		$frameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-		$storagePid = $frameworkConfiguration['persistence']['storagePid'];
-
-		$query->statement("
-			SELECT DISTINCT pp.uid, pp.*, ps.uid_member
-			FROM tx_choirmanager_domain_model_projectparticipation as pp
-			LEFT JOIN tx_choirmanager_domain_model_projectsubscription as ps
-			ON pp.uid = ps.uid_project
-			WHERE (pp.pid=" . $storagePid . " AND pp.deleted = 0 AND pp.hidden = 0)
-			AND ps.uid_member !=" . $uidMember . " AND ps.uid_member IS NULL
-			ORDER BY pp.date
-		");
-
-		return $query->execute();
-
-	}
-
 }
 ?>

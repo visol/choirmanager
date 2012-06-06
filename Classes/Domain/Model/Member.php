@@ -99,6 +99,7 @@ class Tx_Choirmanager_Domain_Model_Member extends Tx_Extbase_Domain_Model_Fronte
 	public function __construct() {
 		//Do not remove the next line: It would break the functionality
 		$this->initStorageObjects();
+		parent::__construct();
 	}
 
 	/**

@@ -41,6 +41,13 @@ class Tx_Choirmanager_Controller_MemberController extends Tx_Extbase_MVC_Control
 	protected $memberRepository;
 
 	/**
+	 * frontendUserGroupRepository
+	 *
+	 * @var Tx_Extbase_Domain_Repository_FrontendUserGroupRepository
+	 */
+	protected $frontendUserGroupRepository;
+
+	/**
 	 * projectParticipationRepository
 	 *
 	 * @var Tx_Choirmanager_Domain_Repository_ProjectParticipationRepository
@@ -157,9 +164,27 @@ class Tx_Choirmanager_Controller_MemberController extends Tx_Extbase_MVC_Control
 
 			// uid of member/frontend user
 		$uidMember = (int)$GLOBALS['TSFE']->fe_user->user['uid'];
-		$projects = $this->projectParticipationRepository->findAllTheMemberDidNotSetAlready($uidMember);
+			// get subscriptions of a member
+		$projectSubscriptions = $this->projectSubscriptionRepository->findByUidMember($uidMember)->toArray();
 
-		$this->view->assign('projects', $projects);
+			// get all projects
+		$projects = $this->projectParticipationRepository->findAll()->toArray();
+
+		$openProjects = array();
+		foreach ($projects as $project) {
+			if (!empty($projectSubscriptions)) {
+				foreach ($projectSubscriptions as $projectSubscription) {
+					if (!($projectSubscription->getUidProject() === $project->getUid())) {
+						$openProjects[] = $project;
+					}
+				}
+			} else {
+				$openProjects[] = $project;
+			}
+		}
+
+		$this->view->assign('projects', $openProjects);
+
 	}
 
 	/**
@@ -210,9 +235,27 @@ class Tx_Choirmanager_Controller_MemberController extends Tx_Extbase_MVC_Control
 
 			// uid of member/frontend user
 		$uidMember = (int)$GLOBALS['TSFE']->fe_user->user['uid'];
-		$periods = $this->membershipPeriodRepository->findAllTheMemberDidNotSetAlready($uidMember);
+			// get subscriptions of a member
+		$periodSubscriptions = $this->periodSubscriptionRepository->findByUidMember($uidMember)->toArray();
 
-		$this->view->assign('periods', $periods);
+			// get all membership meriods
+		$periods = $this->membershipPeriodRepository->findAll()->toArray();
+
+		$openPeriods = array();
+		foreach ($periods as $period) {
+			if (!empty($periodSubscriptions)) {
+				foreach ($periodSubscriptions as $periodSubscription) {
+					if (!($periodSubscription->getUidPeriod() === $period->getUid())) {
+						$openPeriods[] = $period;
+					}
+				}
+			} else {
+				$openPeriods[] = $period;
+			}
+		}
+
+		$this->view->assign('periods', $openPeriods);
+
 	}
 
 	/**
@@ -237,12 +280,24 @@ class Tx_Choirmanager_Controller_MemberController extends Tx_Extbase_MVC_Control
 				$periodSubscriptionRecord->setUidMember($uidMember);
 				$periodSubscriptionRecord->setStatus($status);
 				$this->periodSubscriptionRepository->add($periodSubscriptionRecord);
-				//debug('project: ' . $uidProject . '/member: ' . $uidMember . '/status: ' . $status);
+
+				if ((int)$status === 1) {
+						// if a period status was 1, add active usergroup to user
+						// note to self: in fact we don't know if the person will be active in the closest period to now.
+						// but it seems that we will only have one period active a time. so maybe we wouldn't need to
+						// iterate but just limit the output of active periods to 1
+					$member = $this->memberRepository->findByUid($uidMember);
+					$activeUserGroup = $this->frontendUserGroupRepository->findByUid((int)$this->settings['activeGroup']);
+					$member->addUsergroup($activeUserGroup);
+				}
+
+
 			}
+
+			$this->flashMessageContainer->add('Semesteran/-abmeldung gespeichert.');
+
 		}
 
-		$this->flashMessageContainer->add('Semesteran/-abmeldung gespeichert.');
-// TODO set usergroup active if status is 1!
 		$this->redirect('exitPeriods');
 
 	}
@@ -275,6 +330,16 @@ class Tx_Choirmanager_Controller_MemberController extends Tx_Extbase_MVC_Control
 	 */
 	public function injectMemberRepository(Tx_Choirmanager_Domain_Repository_MemberRepository $memberRepository) {
 		$this->memberRepository = $memberRepository;
+	}
+
+	/**
+	 * injectFrontendUserGroupRepository
+	 *
+	 * @param Tx_Extbase_Domain_Repository_FrontendUserGroupRepository $frontendUserGroupRepository
+	 * @return void
+	 */
+	public function injectFrontendUserGroupRepository(Tx_Extbase_Domain_Repository_FrontendUserGroupRepository $frontendUserGroupRepository) {
+		$this->frontendUserGroupRepository = $frontendUserGroupRepository;
 	}
 
 	/**
