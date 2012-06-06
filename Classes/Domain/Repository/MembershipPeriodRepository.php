@@ -61,7 +61,7 @@ class Tx_Choirmanager_Domain_Repository_MembershipPeriodRepository extends Tx_Ex
 		$storagePid = $frameworkConfiguration['persistence']['storagePid'];
 
 		$query->statement("
-			SELECT mp.*, ps.uid_member
+			SELECT DISTINCT mp.uid, mp.*, ps.uid_member
 			FROM tx_choirmanager_domain_model_membershipperiod as mp
 			LEFT JOIN tx_choirmanager_domain_model_periodsubscription as ps
 			ON mp.uid = ps.uid_period

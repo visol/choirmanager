@@ -242,7 +242,7 @@ class Tx_Choirmanager_Controller_MemberController extends Tx_Extbase_MVC_Control
 		}
 
 		$this->flashMessageContainer->add('Semesteran/-abmeldung gespeichert.');
-
+// TODO set usergroup active if status is 1!
 		$this->redirect('exitPeriods');
 
 	}

@@ -61,7 +61,7 @@ class Tx_Choirmanager_Domain_Repository_ProjectParticipationRepository extends T
 		$storagePid = $frameworkConfiguration['persistence']['storagePid'];
 
 		$query->statement("
-			SELECT pp.*, ps.uid_member
+			SELECT DISTINCT pp.uid, pp.*, ps.uid_member
 			FROM tx_choirmanager_domain_model_projectparticipation as pp
 			LEFT JOIN tx_choirmanager_domain_model_projectsubscription as ps
 			ON pp.uid = ps.uid_project
