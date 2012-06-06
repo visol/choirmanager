@@ -66,7 +66,7 @@ class Tx_Choirmanager_Domain_Repository_MembershipPeriodRepository extends Tx_Ex
 			LEFT JOIN tx_choirmanager_domain_model_periodsubscription as ps
 			ON mp.uid = ps.uid_period
 			WHERE (mp.pid=" . $storagePid . " AND mp.deleted = 0 AND mp.hidden = 0)
-			AND (ps.uid_member !=" . $uidMember . " OR ps.uid_member IS NULL)
+			AND ps.uid_member !=" . $uidMember . " AND ps.uid_member IS NULL
 		");
 
 		return $query->execute();

@@ -66,7 +66,7 @@ class Tx_Choirmanager_Domain_Repository_ProjectParticipationRepository extends T
 			LEFT JOIN tx_choirmanager_domain_model_projectsubscription as ps
 			ON pp.uid = ps.uid_project
 			WHERE (pp.pid=" . $storagePid . " AND pp.deleted = 0 AND pp.hidden = 0)
-			AND (ps.uid_member !=" . $uidMember . " OR ps.uid_member IS NULL)
+			AND ps.uid_member !=" . $uidMember . " AND ps.uid_member IS NULL
 			ORDER BY pp.date
 		");
 
