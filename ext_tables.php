@@ -28,6 +28,13 @@ Tx_Extbase_Utility_Extension::registerPlugin(
 	'Choir Manager: Edit period subscriptions'
 );
 
+	// Suspend Membership
+Tx_Extbase_Utility_Extension::registerPlugin(
+	$_EXTKEY,
+	'SuspendMembership',
+	'Choir Manager: Suspend membership'
+);
+
 
 t3lib_div::loadTCA('fe_users');
 if (!isset($TCA['fe_users']['ctrl']['type'])) {

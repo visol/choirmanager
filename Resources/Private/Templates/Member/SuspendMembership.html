@@ -1,0 +1,40 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+
+<f:flashMessages />
+
+	<f:security.ifAuthenticated>
+
+		<f:then>
+
+			<f:security.ifHasRole role="{settings.inactiveGroup}">
+
+				<f:then>
+
+					<h2>Pausieren</h2>
+					<p>Dein aktueller Status ist: pausierend<br />Nächstes Semester erhältst du wieder die Möglichkeit, aktiv teilzunehmen.</p>
+
+				</f:then>
+
+				<f:else>
+
+					<p>Wenn du für eine gewisse Zeit nicht im Unichor mitmachen möchtest oder kannst, klicke auf „pausieren“. In diesem Fall werden deine Daten gespeichert und du erhältst weiterhin Einladungen für kommende Unichorprojekte.</p>
+
+					<f:form action="suspendMembershipConfirmation">
+						<f:form.submit name="suspendConfirm" value="pausieren" />
+					</f:form>
+
+				</f:else>
+
+			</f:security.ifHasRole>
+
+		</f:then>
+
+		<f:else>
+			Zugriff verweigert. Du musst angemeldet sein.
+		</f:else>
+
+	</f:security.ifAuthenticated>
+
+</f:section>

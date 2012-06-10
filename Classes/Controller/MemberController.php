@@ -324,6 +324,35 @@ class Tx_Choirmanager_Controller_MemberController extends Tx_Extbase_MVC_Control
 	}
 
 	/**
+	 * action suspendMembership
+	 *
+	 * @return void
+	 */
+	public function suspendMembershipAction() {
+	}
+
+	/**
+	 * action suspendMembershipConfirmation
+	 *
+	 * @return void
+	 */
+	public function suspendMembershipConfirmationAction() {
+
+			// uid of member/frontend user
+		$uidMember = (int)$GLOBALS['TSFE']->fe_user->user['uid'];
+
+			// status was 0, so remove active usergroup and add inactive usergroup
+		$member = $this->memberRepository->findByUid($uidMember);
+		$activeUserGroup = $this->frontendUserGroupRepository->findByUid((int)$this->settings['activeGroup']);
+		$member->removeUsergroup($activeUserGroup);
+		$this->persistenceManager->persistAll();
+			// add inactive usergroup
+		$inactiveUserGroup = $this->frontendUserGroupRepository->findByUid((int)$this->settings['inactiveGroup']);
+		$member->addUsergroup($inactiveUserGroup);
+
+	}
+
+	/**
 	 * action delete
 	 *
 	 * @param Tx_Choirmanager_Domain_Model_Member

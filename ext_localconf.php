@@ -41,4 +41,17 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
+	// Suspend membership
+Tx_Extbase_Utility_Extension::configurePlugin(
+	$_EXTKEY,
+	'SuspendMembership',
+	array(
+		'Member' => 'suspendMembership, suspendMembershipConfirmation',
+	),
+	// non-cacheable actions
+	array(
+		'Member' => 'suspendMembershipConfirmation'
+	)
+);
+
 ?>
