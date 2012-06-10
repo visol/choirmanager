@@ -212,7 +212,7 @@ class Tx_Choirmanager_Controller_MemberController extends Tx_Extbase_MVC_Control
 				//debug('project: ' . $uidProject . '/member: ' . $uidMember . '/status: ' . $status);
 			}
 		}
-		$this->flashMessageContainer->add('Projektan/-abmeldung gespeichert.');
+		$this->flashMessageContainer->add('Projektanmeldung bzw. -abmeldung gespeichert.');
 
 		$this->redirect('exitSubscriptions');
 
@@ -299,8 +299,8 @@ class Tx_Choirmanager_Controller_MemberController extends Tx_Extbase_MVC_Control
 					$activeUserGroup = $this->frontendUserGroupRepository->findByUid((int)$this->settings['activeGroup']);
 					$member->removeUsergroup($activeUserGroup);
 					$this->persistenceManager->persistAll();
-						// add inactive usergroup
-					$inactiveUserGroup = $this->frontendUserGroupRepository->findByUid((int)$this->settings['inactiveGroup']);
+						// add suspended usergroup
+					$inactiveUserGroup = $this->frontendUserGroupRepository->findByUid((int)$this->settings['suspendedGroup']);
 					$member->addUsergroup($inactiveUserGroup);
 				}
 
@@ -346,8 +346,8 @@ class Tx_Choirmanager_Controller_MemberController extends Tx_Extbase_MVC_Control
 		$activeUserGroup = $this->frontendUserGroupRepository->findByUid((int)$this->settings['activeGroup']);
 		$member->removeUsergroup($activeUserGroup);
 		$this->persistenceManager->persistAll();
-			// add inactive usergroup
-		$inactiveUserGroup = $this->frontendUserGroupRepository->findByUid((int)$this->settings['inactiveGroup']);
+			// add suspended usergroup
+		$inactiveUserGroup = $this->frontendUserGroupRepository->findByUid((int)$this->settings['suspendedGroup']);
 		$member->addUsergroup($inactiveUserGroup);
 
 	}
