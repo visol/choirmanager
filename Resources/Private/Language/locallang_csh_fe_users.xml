@@ -12,6 +12,7 @@
 			<label index="voicetype.description">Voice type</label>
 			<label index="membership_period.description">Membership period</label>
 			<label index="project_participation.description">Project participation</label>
+			<label index="terms_approval.description">Accept terms and conditions</label>
 		</languageKey>
 	</data>
 </T3locallang>

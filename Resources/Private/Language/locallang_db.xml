@@ -12,6 +12,7 @@
 			<label index="tx_choirmanager_domain_model_member.voicetype">Voice type</label>
 			<label index="tx_choirmanager_domain_model_member.membership_period">Membership Period</label>
 			<label index="tx_choirmanager_domain_model_member.project_participation">Project Participation</label>
+			<label index="tx_choirmanager_domain_model_member.terms_approval">Accept terms and conditions</label>
 			<label index="fe_users.tx_extbase_type.Tx_Choirmanager_Member">Choir Manager Member</label>
 			
 			<label index="tx_choirmanager_domain_model_job">Job</label>

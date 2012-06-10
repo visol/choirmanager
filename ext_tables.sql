@@ -8,8 +8,9 @@ CREATE TABLE fe_users (
 	birthdate int(11) DEFAULT '0' NOT NULL,
 	job int(11) unsigned DEFAULT '0' NOT NULL,
 	voicetype int(11) unsigned DEFAULT '0' NOT NULL,
-	membership_period int(11) unsigned DEFAULT '0' NOT NULL,
-	project_participation int(11) unsigned DEFAULT '0' NOT NULL,
+	#membership_period int(11) unsigned DEFAULT '0' NOT NULL,
+	#project_participation int(11) unsigned DEFAULT '0' NOT NULL,
+	terms_approval tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
 	tx_extbase_type varchar(255) DEFAULT '' NOT NULL,
 

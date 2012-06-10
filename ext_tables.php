@@ -99,7 +99,15 @@ $tmp_choirmanager_columns = array(
 			'maxitems'      => 1,
 		),
 	),
-	'membership_period' => array(
+	'terms_approval' => array(
+		'exclude' => 1,
+		'label' => 'LLL:EXT:choirmanager/Resources/Private/Language/locallang_db.xml:tx_choirmanager_domain_model_member.terms_approval',
+		'config' => array(
+			'type' => 'check',
+			'eval' => 'required'
+		),
+	),
+	/*'membership_period' => array(
 		'exclude' => 1,
 		'label' => 'LLL:EXT:choirmanager/Resources/Private/Language/locallang_db.xml:tx_choirmanager_domain_model_member.membership_period',
 		'config' => array(
@@ -170,7 +178,7 @@ $tmp_choirmanager_columns = array(
 				),
 			),
 		),
-	),
+	),*/
 );
 
 
@@ -181,7 +189,8 @@ $TCA['fe_users']['columns'][$TCA['fe_users']['ctrl']['type']]['config']['items']
 
 $TCA['fe_users']['types']['Tx_Choirmanager_Member']['showitem'] = $TCA['fe_users']['types']['Tx_Extbase_Domain_Model_FrontendUser']['showitem'];
 $TCA['fe_users']['types']['Tx_Choirmanager_Member']['showitem'] .= ',--div--;LLL:EXT:choirmanager/Resources/Private/Language/locallang_db.xml:tx_choirmanager_domain_model_member,';
-$TCA['fe_users']['types']['Tx_Choirmanager_Member']['showitem'] .= 'birthdate, job, voicetype, membership_period, project_participation';
+//$TCA['fe_users']['types']['Tx_Choirmanager_Member']['showitem'] .= 'terms_approval, birthdate, job, voicetype, membership_period, project_participation';
+$TCA['fe_users']['types']['Tx_Choirmanager_Member']['showitem'] .= 'terms_approval, birthdate, job, voicetype';
 
 			
 		
