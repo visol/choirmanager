@@ -197,7 +197,7 @@ class Tx_Choirmanager_Controller_MemberController extends Tx_Extbase_MVC_Control
 			// uid of member/frontend user
 		$uidMember = (int)$GLOBALS['TSFE']->fe_user->user['uid'];
 
-		$arguments = $this->request->getArgument('tx_choirmanager');
+		$arguments = $this->request->getArguments();
 		if (is_array($arguments['projectSubscription'])) {
 			$projectSubscriptions = $arguments['projectSubscription'];
 			foreach ($projectSubscriptions as $uidProject => $projectSubscription) {
@@ -268,7 +268,7 @@ class Tx_Choirmanager_Controller_MemberController extends Tx_Extbase_MVC_Control
 			// uid of member/frontend user
 		$uidMember = (int)$GLOBALS['TSFE']->fe_user->user['uid'];
 
-		$arguments = $this->request->getArgument('tx_choirmanager');
+		$arguments = $this->request->getArguments();
 		if (is_array($arguments['periodSubscription'])) {
 			$periodSubscriptions = $arguments['periodSubscription'];
 			foreach ($periodSubscriptions as $uidPeriod => $periodSubscription) {
