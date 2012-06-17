@@ -298,6 +298,8 @@ class Tx_Choirmanager_Controller_MemberController extends Tx_Extbase_MVC_Control
 					$member = $this->memberRepository->findByUid($uidMember);
 					$activeUserGroup = $this->frontendUserGroupRepository->findByUid((int)$this->settings['activeGroup']);
 					$member->removeUsergroup($activeUserGroup);
+					$inactiveUserGroup = $this->frontendUserGroupRepository->findByUid((int)$this->settings['inactiveGroup']);
+					$member->removeUsergroup($inactiveUserGroup);
 					$this->persistenceManager->persistAll();
 						// add suspended usergroup
 					$inactiveUserGroup = $this->frontendUserGroupRepository->findByUid((int)$this->settings['suspendedGroup']);
