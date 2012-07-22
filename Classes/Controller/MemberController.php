@@ -97,7 +97,7 @@ class Tx_Choirmanager_Controller_MemberController extends Tx_Extbase_MVC_Control
 	 */
 	public function listAction() {
 		$activeUserGroup = $this->frontendUserGroupRepository->findByUid((int)$this->settings['activeGroup']);
-		$members = $this->memberRepository->findAllByUsergroup($activeUserGroup);
+		$members = $this->memberRepository->findByUsergroup($activeUserGroup);
 		$this->view->assign('members', $members);
 	}
 
