@@ -37,7 +37,15 @@ class Tx_Choirmanager_Domain_Repository_MemberRepository extends Tx_Extbase_Pers
      protected $defaultOrderings = array(
          'lastName' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING
      );
-	
+
+	public function findByUsergroup($usergroup) {
+		$query = $this->createQuery();
+		$query->matching(
+			$query->contains('usergroup', $usergroup)
+		);
+		return $query->execute();
+	}
+
 }
 
 ?>
