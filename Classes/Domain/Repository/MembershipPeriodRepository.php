@@ -33,6 +33,16 @@
  */
 class Tx_Choirmanager_Domain_Repository_MembershipPeriodRepository extends Tx_Extbase_Persistence_Repository {
 
+	public function findOpenPeriodsByGivenPeriods($periodUids) {
+		$query = $this->createQuery();
+		$query->matching(
+			$query->logicalNot(
+				$query->in('uid', $periodUids)
+			)
+		);
+		return $query->execute()->toArray();
+	}
+
 }
 
 ?>

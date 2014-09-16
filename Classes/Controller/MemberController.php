@@ -238,22 +238,12 @@ class Tx_Choirmanager_Controller_MemberController extends Tx_Extbase_MVC_Control
 		$uidMember = (int)$GLOBALS['TSFE']->fe_user->user['uid'];
 			// get subscriptions of a member
 		$periodSubscriptions = $this->periodSubscriptionRepository->findByUidMember($uidMember)->toArray();
-
-			// get all membership meriods
-		$periods = $this->membershipPeriodRepository->findAll()->toArray();
-
-		$openPeriods = array();
-		foreach ($periods as $period) {
-			if (!empty($periodSubscriptions)) {
-				foreach ($periodSubscriptions as $periodSubscription) {
-					if (!($periodSubscription->getUidPeriod() === $period->getUid())) {
-						$openPeriods[] = $period;
-					}
-				}
-			} else {
-				$openPeriods[] = $period;
-			}
+		$periodUids = array();
+		foreach ($periodSubscriptions as $periodSubscription) {
+			$periodUids[] = $periodSubscription->getUidPeriod();
 		}
+
+		$openPeriods = $this->membershipPeriodRepository->findOpenPeriodsByGivenPeriods($periodUids);
 
 		$this->view->assign('periods', $openPeriods);
 
@@ -370,7 +360,7 @@ class Tx_Choirmanager_Controller_MemberController extends Tx_Extbase_MVC_Control
 	/**
 	 * injectCustomFrontendUserRepository
 	 *
-	 * @param Tx_Choirmanager_Domain_Repository_MemberRepository $MemberRepository
+	 * @param Tx_Choirmanager_Domain_Repository_MemberRepository $memberRepository
 	 * @return void
 	 */
 	public function injectMemberRepository(Tx_Choirmanager_Domain_Repository_MemberRepository $memberRepository) {
