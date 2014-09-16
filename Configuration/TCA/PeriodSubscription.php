@@ -58,18 +58,26 @@ $TCA['tx_choirmanager_domain_model_periodsubscription'] = array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:choirmanager/Resources/Private/Language/locallang_db.xml:tx_choirmanager_domain_model_periodsubscription.uid_member',
 			'config' => array(
-				'type' => 'input',
-				'size' => 30,
-				'eval' => 'int'
+				'type' => 'select',
+				'foreign_table' => 'fe_users',
+				'foreign_table_where' => 'ORDER BY fe_users.username',
+				'readOnly' => TRUE,
+				'items' => array(
+					array('', 0)
+				),
 			),
 		),
 		'uid_period' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:choirmanager/Resources/Private/Language/locallang_db.xml:tx_choirmanager_domain_model_periodsubscription.uid_period',
 			'config' => array(
-				'type' => 'input',
-				'size' => 30,
-				'eval' => 'int'
+				'type' => 'select',
+				'foreign_table' => 'tx_choirmanager_domain_model_membershipperiod',
+				'foreign_table_where' => 'ORDER BY tx_choirmanager_domain_model_membershipperiod.show_from',
+				'readOnly' => TRUE,
+				'items' => array(
+					array('', 0)
+				),
 			),
 		),
 		'status' => array(
